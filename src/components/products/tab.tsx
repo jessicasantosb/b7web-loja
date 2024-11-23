@@ -1,6 +1,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-export function ProductsTab() {
+export async function ProductsTab() {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
   return (
     <Tabs defaultValue="tab1">
       <TabsList className="flex mb-6">
