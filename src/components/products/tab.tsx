@@ -1,7 +1,9 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { getProducts } from "@/services/product";
 
 export async function ProductsTab() {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  const products = await getProducts();
+  console.log(products);
 
   return (
     <Tabs defaultValue="tab1">
