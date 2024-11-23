@@ -12,7 +12,7 @@ import { Separator } from "../ui/separator";
 export function Sidebar() {
   return (
     <Sheet>
-      <SheetTrigger>
+      <SheetTrigger asChild>
         <Button>
           <ShoppingCart />
         </Button>
