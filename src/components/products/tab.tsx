@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 export function ProductsTab() {
   return (
     <Tabs defaultValue="tab1">
-      <TabsList className="flex">
+      <TabsList className="flex mb-6">
         <TabsTrigger value="tab1" className="flex-1">
           Tab 1
         </TabsTrigger>
