@@ -1,5 +1,6 @@
+import { Sidebar } from "@/components/cart/sidebar";
 import { Logo } from "@/components/logo";
-import { ModeToggle } from "./mode-toggle";
+import { ModeToggle } from "@/components/mode-toggle";
 
 export function Header() {
   return (
@@ -8,7 +9,9 @@ export function Header() {
         <Logo />
         <ModeToggle />
       </div>
-      <div>...</div>
+      <div>
+        <Sidebar />
+      </div>
     </header>
   );
 }
