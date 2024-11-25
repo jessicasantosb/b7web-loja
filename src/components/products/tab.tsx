@@ -1,6 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getProducts } from "@/services/product";
 import { ProductProps } from "@/types/product";
+import { ProductsEmpty } from "./empty";
 
 type ValueProps = "sushi" | "temaki" | "pack" | "beverage";
 
@@ -41,7 +42,7 @@ export async function ProductsTab() {
   ];
 
   return (
-    <Tabs defaultValue="sushi">
+    <Tabs defaultValue="sushi" className="min-h-dvh">
       <TabsList className="flex mb-6">
         {tabs.map(({ title, value }) => (
           <TabsTrigger key={value} value={value} className="flex-1">
@@ -57,6 +58,8 @@ export async function ProductsTab() {
               <div key={product.id}>{product.name}</div>
             ))}
           </div>
+
+          {products.length === 0 && <ProductsEmpty />}
         </TabsContent>
       ))}
     </Tabs>
