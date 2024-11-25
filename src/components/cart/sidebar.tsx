@@ -1,4 +1,9 @@
+"use client";
+
+import { ShoppingCart } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import {
   Sheet,
   SheetContent,
@@ -6,10 +11,15 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ShoppingCart } from "lucide-react";
-import { Separator } from "../ui/separator";
+import { useCartStore } from "@/stores/cart-store";
 
 export function Sidebar() {
+  const { cart } = useCartStore((state) => state);
+
+  let subtotal = 0;
+
+  for (let item of cart) subtotal += item.quantity * item.product.price;
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -29,7 +39,7 @@ export function Sidebar() {
 
         <div className="flex items-center justify-between text-xs">
           <h4>Subtotal</h4>
-          <p>...</p>
+          <p>{subtotal.toFixed(2)}</p>
         </div>
 
         <Separator className="my-4" />
