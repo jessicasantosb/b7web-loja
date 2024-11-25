@@ -45,7 +45,7 @@ export function Sidebar() {
         <Separator className="my-4" />
 
         <div className="text-center">
-          <Button>Finalizar compra</Button>
+          <Button disabled={cart.length === 0}>Finalizar compra</Button>
         </div>
       </SheetContent>
     </Sheet>
