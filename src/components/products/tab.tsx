@@ -2,51 +2,63 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getProducts } from "@/services/product";
 import { ProductProps } from "@/types/product";
 
+type ValueProps = "sushi" | "temaki" | "pack" | "beverage";
+
 type TabProps = {
   title: string;
-  value: string;
+  value: ValueProps;
   products: ProductProps[];
 };
 
 export async function ProductsTab() {
   const products = await getProducts();
-  console.log(products);
+
+  const filterProducts = (value: ValueProps) => {
+    return products.filter((product) => product.category === value);
+  };
 
   const tabs: TabProps[] = [
     {
-      title: "sushi",
+      title: "Sushi",
       value: "sushi",
-      products: [],
+      products: filterProducts("sushi"),
     },
     {
       title: "Temaki",
       value: "temaki",
-      products: [],
+      products: filterProducts("temaki"),
     },
     {
       title: "Combinados",
       value: "pack",
-      products: [],
+      products: filterProducts("pack"),
     },
     {
       title: "Bebidas",
       value: "beverage",
-      products: [],
+      products: filterProducts("beverage"),
     },
   ];
 
   return (
-    <Tabs defaultValue="tab1">
+    <Tabs defaultValue="sushi">
       <TabsList className="flex mb-6">
         {tabs.map(({ title, value }) => (
-          <TabsTrigger key={title} value={value} className="flex-1">
+          <TabsTrigger key={value} value={value} className="flex-1">
             {title}
           </TabsTrigger>
         ))}
       </TabsList>
 
-      <TabsContent value="tab1">Conteúdo tab1</TabsContent>
-      <TabsContent value="tab2">Conteúdo tab2</TabsContent>
+      {tabs.map(({ value, products }) => (
+        <TabsContent key={value} value={value}>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+            {products.map((product) => (
+              <div key={product.id}>{product.name}</div>
+            ))}
+          </div>
+        </TabsContent>
+      ))}
     </Tabs>
   );
 }
