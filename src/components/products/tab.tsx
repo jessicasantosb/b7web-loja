@@ -2,6 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getProducts } from "@/services/product";
 import { ProductProps } from "@/types/product";
 import { ProductsEmpty } from "./empty";
+import { Product } from "./product";
 
 type ValueProps = "sushi" | "temaki" | "pack" | "beverage";
 
@@ -53,11 +54,13 @@ export async function ProductsTab() {
 
       {tabs.map(({ value, products }) => (
         <TabsContent key={value} value={value}>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
-            {products.map((product) => (
-              <div key={product.id}>{product.name}</div>
-            ))}
-          </div>
+          {products.length > 0 && (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+              {products.map((product) => (
+                <Product key={product.id} product={product} />
+              ))}
+            </div>
+          )}
 
           {products.length === 0 && <ProductsEmpty />}
         </TabsContent>
