@@ -5,12 +5,16 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/hooks/use-toast";
+import { useCartStore } from "@/stores/cart-store";
 import { ProductProps } from "@/types/product";
 
 export function Product({ product }: { product: ProductProps }) {
   const { toast } = useToast();
+  const { upsertCartItem } = useCartStore((state) => state);
 
   const handleAddProduct = () => {
+    upsertCartItem(product, 1);
+
     toast({
       title: "Adicionado ao carrinho!",
       description: product.name,
