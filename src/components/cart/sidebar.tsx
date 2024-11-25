@@ -23,8 +23,13 @@ export function Sidebar() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button>
+        <Button className="relative">
           <ShoppingCart />
+          {cart.length > 0 && (
+            <div className="absolute -top-2 -right-2 px-1 rounded-sm bg-red-500 text-white">
+              {cart.length}
+            </div>
+          )}
         </Button>
       </SheetTrigger>
 
