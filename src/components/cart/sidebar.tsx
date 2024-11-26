@@ -49,7 +49,7 @@ export function Sidebar() {
 
         <div className="flex items-center justify-between text-xs">
           <h4>Subtotal</h4>
-          <p>{subtotal.toFixed(2)}</p>
+          <p>R$ {subtotal.toFixed(2)}</p>
         </div>
 
         <Separator className="my-4" />
