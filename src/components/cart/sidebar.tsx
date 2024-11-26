@@ -1,7 +1,10 @@
 "use client";
 
 import { ShoppingCart } from "lucide-react";
+import { useState } from "react";
 
+import { CartItem } from "@/components/cart/item";
+import { CheckoutDialog } from "@/components/checkout/dialog";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -12,9 +15,9 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useCartStore } from "@/stores/cart-store";
-import { CartItem } from "./item";
 
 export function Sidebar() {
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
   const { cart } = useCartStore((state) => state);
 
   let subtotal = 0;
@@ -34,7 +37,7 @@ export function Sidebar() {
         </Button>
       </SheetTrigger>
 
-      <SheetContent>
+      <SheetContent className="flex flex-col" aria-describedby={undefined}>
         <SheetHeader>
           <SheetTitle>Carrinho</SheetTitle>
         </SheetHeader>
@@ -49,14 +52,21 @@ export function Sidebar() {
 
         <div className="flex items-center justify-between text-xs">
           <h4>Subtotal</h4>
-          <p>R$ {subtotal.toFixed(2)}</p>
+          <p className="font-bold">R$ {subtotal.toFixed(2)}</p>
         </div>
 
         <Separator className="my-4" />
 
-        <div className="text-center">
-          <Button disabled={cart.length === 0}>Finalizar compra</Button>
+        <div className="text-center self-end">
+          <Button
+            onClick={() => setCheckoutOpen(true)}
+            disabled={cart.length === 0}
+          >
+            Finalizar compra
+          </Button>
         </div>
+
+        <CheckoutDialog open={checkoutOpen} onOpenChange={setCheckoutOpen} />
       </SheetContent>
     </Sheet>
   );
