@@ -24,14 +24,14 @@ export function Product({ product }: { product: ProductProps }) {
 
   return (
     <div className="p-1">
-      <div className="relative h-32 object-cover">
+      <div className="relative h-32">
         <Image
           alt={product.name}
           src={product.image}
           fill
           sizes="auto"
           priority
-          className="absolute rounded-sm"
+          className="absolute rounded-sm object-cover"
         />
       </div>
       <h3 className="pt-2 text-lg">{product.name}</h3>
