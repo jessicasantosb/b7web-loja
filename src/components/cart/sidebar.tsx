@@ -12,6 +12,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useCartStore } from "@/stores/cart-store";
+import { CartItem } from "./item";
 
 export function Sidebar() {
   const { cart } = useCartStore((state) => state);
@@ -38,7 +39,11 @@ export function Sidebar() {
           <SheetTitle>Carrinho</SheetTitle>
         </SheetHeader>
 
-        <div className="flex flex-col gap-5 my-3">...</div>
+        <div className="flex flex-col gap-5 my-3">
+          {cart.map((item) => (
+            <CartItem key={item.product.id} item={item} />
+          ))}
+        </div>
 
         <Separator className="my-4" />
 
