@@ -17,30 +17,34 @@ type ChekoutProps = {
   onOpenChange: (open: boolean) => void;
 };
 
+type StepsElementsProps = {
+  progressBar: number;
+  stepTitle: string;
+  stepField: JSX.Element;
+};
+
 export function CheckoutDialog({ open, onOpenChange }: ChekoutProps) {
   const [step, setStep] = useState<StepsProps>("user");
 
-  let progressBar = 0;
-  let stepTitle = "";
-  let stepElement: JSX.Element;
+  const elements: Record<StepsProps, StepsElementsProps> = {
+    user: {
+      progressBar: 30,
+      stepTitle: "Dados Pessoais",
+      stepField: <StepUser setStep={setStep} />,
+    },
+    address: {
+      progressBar: 70,
+      stepTitle: "Endereço de entrega",
+      stepField: <StepAddress setStep={setStep} />,
+    },
+    finish: {
+      progressBar: 100,
+      stepTitle: "Envio para o whatsapp",
+      stepField: <StepFinish />,
+    },
+  };
 
-  switch (step) {
-    case "user":
-      progressBar = 30;
-      stepTitle = "Dados Pessoais";
-      stepElement = <StepUser setStep={setStep} />;
-      break;
-    case "address":
-      progressBar = 70;
-      stepTitle = "Endereço de entrega";
-      stepElement = <StepAddress setStep={setStep} />;
-      break;
-    case "finish":
-      progressBar = 100;
-      stepTitle = "Envio para o Whatsapp";
-      stepElement = <StepFinish />;
-      break;
-  }
+  const { progressBar, stepTitle, stepField } = elements[step];
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -51,7 +55,7 @@ export function CheckoutDialog({ open, onOpenChange }: ChekoutProps) {
 
         <Progress value={progressBar} />
 
-        <div className="flex flex-col gap-3">{stepElement}</div>
+        <div className="flex flex-col gap-3">{stepField}</div>
       </DialogContent>
     </Dialog>
   );
