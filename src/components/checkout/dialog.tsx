@@ -10,8 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Progress } from "@/components/ui/progress";
-
-type StepsProps = "user" | "address" | "finish";
+import { StepsProps } from "@/types/checkout-steps";
 
 type ChekoutProps = {
   open: boolean;
@@ -29,12 +28,12 @@ export function CheckoutDialog({ open, onOpenChange }: ChekoutProps) {
     case "user":
       progressBar = 30;
       stepTitle = "Dados Pessoais";
-      stepElement = <StepUser />;
+      stepElement = <StepUser setStep={setStep} />;
       break;
     case "address":
       progressBar = 70;
       stepTitle = "Endereço de entrega";
-      stepElement = <StepAddress />;
+      stepElement = <StepAddress setStep={setStep} />;
       break;
     case "finish":
       progressBar = 100;
