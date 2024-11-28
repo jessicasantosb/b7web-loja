@@ -1,8 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Dispatch, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -14,12 +14,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { stepUserSchema } from "@/schemas/step-user";
 import { useCheckoutStore } from "@/stores/checkout-store";
-import { StepsProps } from "@/types/checkout-steps";
-import { Button } from "../ui/button";
+import { SetStepProps } from "@/types/checkout-steps";
 
-type StepUserProps = { setStep: Dispatch<SetStateAction<StepsProps>> };
-
-export function StepUser({ setStep }: StepUserProps) {
+export function StepUser({ setStep }: SetStepProps) {
   const { name, setName } = useCheckoutStore((state) => state);
 
   const form = useForm<z.infer<typeof stepUserSchema>>({
