@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+import { StepAddress } from "@/components/checkout/step-address";
+import { StepFinish } from "@/components/checkout/step-finish";
+import { StepUser } from "@/components/checkout/step-user";
 import {
   Dialog,
   DialogContent,
@@ -20,19 +23,23 @@ export function CheckoutDialog({ open, onOpenChange }: ChekoutProps) {
 
   let progressBar = 0;
   let stepTitle = "";
+  let stepElement: JSX.Element;
 
   switch (step) {
     case "user":
       progressBar = 30;
       stepTitle = "Dados Pessoais";
+      stepElement = <StepUser />;
       break;
     case "address":
       progressBar = 70;
       stepTitle = "Endereço de entrega";
+      stepElement = <StepAddress />;
       break;
     case "finish":
       progressBar = 100;
       stepTitle = "Envio para o Whatsapp";
+      stepElement = <StepFinish />;
       break;
   }
 
@@ -45,7 +52,7 @@ export function CheckoutDialog({ open, onOpenChange }: ChekoutProps) {
 
         <Progress value={progressBar} />
 
-        <div className="flex flex-col gap-3"></div>
+        <div className="flex flex-col gap-3">{stepElement}</div>
       </DialogContent>
     </Dialog>
   );
