@@ -34,12 +34,12 @@ export function CheckoutDialog({ open, onOpenChange }: ChekoutProps) {
     },
     address: {
       progressBar: 70,
-      stepTitle: "Endereço de entrega",
+      stepTitle: "Endereço de Entrega",
       stepField: <StepAddress setStep={setStep} />,
     },
     finish: {
       progressBar: 100,
-      stepTitle: "Envio para o whatsapp",
+      stepTitle: "Envio para o Whatsapp",
       stepField: <StepFinish />,
     },
   };
