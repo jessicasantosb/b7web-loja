@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type States = {
+export type States = {
   name: string;
   address: {
     street: string;
